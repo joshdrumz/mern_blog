@@ -5,6 +5,9 @@ import cors from 'cors';
 import morgan from 'morgan';
 import config from './config';
 
+// routes
+import postRoutes from './routes/api/posts';
+
 const { MONGO_URI } = config;
 
 const app = express();
@@ -24,6 +27,8 @@ mongoose
   })
   .then(() => console.log('MongoDB Connected...'))
   .catch(err => console.log(err));
+
+app.use('/api/posts', postRoutes);
 
 if (process.env.NODE_ENV === 'production') {
   // Set static folder
